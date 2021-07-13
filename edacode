@@ -1,0 +1,143 @@
+#package installing
+install.packages("tidyverse")
+library(tidyverse)
+
+install.packages("caret")
+library(caret)
+
+install.packages("RCurl")
+library(RCurl)
+
+install.packages("skimr")
+library(skimr)
+
+#importing .csv into global enviroment
+data <- read.csv("covid.csv")
+
+#view data
+head(data)
+tail(data)
+View(data)
+str(data)
+
+#extracting copmponents of dataframe
+data[1,2]
+data[,2]
+data$Recovered
+my_data %>%
+  select(Recovered, 30-01-2020)
+
+
+#dimenstion of dataset
+dim(data)
+
+#list the datatype of each attribute
+sapply(data,class)
+
+#check wheather there is null value
+sum(is.na(data))
+
+#sumarize
+summary(data)
+
+#displaying detailed summary statistics
+skim(data)
+
+#group data by index
+data %>%
+  dplyr::group_by(Deceased)%>%
+  skim()
+
+#create validation set
+validation <- createDataPartition(data$Recovered,p=0.50,list=FALSE)
+validation50 <-data[-validation,]
+
+data<-data[validation,]
+view(data)
+
+#input and output
+x<-data[,2:3]
+view(x)
+y<-data[,2]
+view(y)
+
+#plots
+boxplot(x[,2],main=names(data)[1],ylab="Confirmed")
+boxplot(x[,2],main=names(data)[3],ylab="01-03-2021")
+
+#for all attribute
+par (mfrow=c(1,1))
+for(i in 1:1)
+{
+  boxplot(x[,i],main=names(data)[i])
+}
+
+library(caret)
+plot(x)
+
+#scatter plot
+library(caret)
+featurePlot(x=x,y=y)
+
+install.packages("ellipse")
+library(ellipse)
+library(caret)
+featurePlot(x=x,y=y,plot ="ellipse")
+
+#box plots
+library(caret)
+featurePlot(x=x,y=y,plot="box")
+
+#density plot
+scales<-list(x=list(relation="free"),y=list(relation="free"))
+
+scales<-list(x=list(relation="free"),y=list(relation="free"))
+featurePlot(x=x,y=y,plot = "density",scales=scales)
+
+#barplot
+counts<-table(data$Confirmed)
+barplot(counts)
+barplot(counts,horiz=TRUE)
+barplot(counts,
+        main="Barplot",xlab="open",legend=rownames(counts),col=c("red","yellow","green"))
+
+#boxplot
+bwplot(~Confirmed,data=data,main="boxplots")
+library("caret")
+
+#High
+bwplot(~Confirmed|01-03-2021,data=data,main="boxplots")
+
+#hisogram
+install.packages("lattice")
+library(lattice)
+histogram(~Confirmed,data = data,main="histogram")
+histogram(~01-03-2021,data = data,main="histogram")
+
+#scatter
+xyplot(Confirmed~01-03-2021,data=data,main="Scatterplot")
+
+#barchart
+barchart(~Confirmed,data=data,main="Barchart")
+barchart(~01-03-2021,data=data,main="Barchart")
+
+#densityplot
+densityplot(~Confirmed,data=data)
+densityplot(~01-03-2021,data=data)
+
+#piechart
+install.packages("plotrix")
+library(plotrix)
+slices<-c("Confirmed")
+lbls<-c("01-03-2021")
+pie(slices,labels=lbls,main="Piecharts")
+
+#ggplot
+library(ggplot2)
+library(grid)
+library(gridExtra)
+(plot1<-ggplot(data=data,mapping=aes(x=Confirmed,y=01-03-2021))+geom_boxplot())
+ggplot(data=data,mapping=aes(x=Confirmed,y=01-03-2021))+geom_boxplot(notch = TRUE,outlier.colour = "green",outlier.size = 3)
+
+#modify
+ggplot(data=data,mapping=aes(x=EstimatedSalary,y=Confirmed,colour=01-03-2021))+geom_point()+facet_grid(~Confirmed)
