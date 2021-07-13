@@ -1,0 +1,792 @@
+#package installing
+> install.packages("tidyverse")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/tidyverse_1.3.1.zip'
+Content type 'application/zip' length 430143 bytes (420 KB)
+downloaded 420 KB
+
+package ‘tidyverse’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpsfWCbc\downloaded_packages
+> library(tidyverse)
+-- Attaching packages -------------------------------------------------- tidyverse 1.3.1 --
+v ggplot2 3.3.5     v purrr   0.3.4
+v tibble  3.1.2     v dplyr   1.0.7
+v tidyr   1.1.3     v stringr 1.4.0
+v readr   1.4.0     v forcats 0.5.1
+-- Conflicts ----------------------------------------------------- tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+> 
+> install.packages("caret")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/caret_6.0-88.zip'
+Content type 'application/zip' length 6295081 bytes (6.0 MB)
+downloaded 6.0 MB
+
+package ‘caret’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpsfWCbc\downloaded_packages
+> library(caret)
+Loading required package: lattice
+
+Attaching package: ‘caret’
+
+The following object is masked from ‘package:purrr’:
+
+    lift
+
+> 
+> install.packages("RCurl")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/RCurl_1.98-1.3.zip'
+Content type 'application/zip' length 3072176 bytes (2.9 MB)
+downloaded 2.9 MB
+
+package ‘RCurl’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpsfWCbc\downloaded_packages
+> library(RCurl)
+
+Attaching package: ‘RCurl’
+
+The following object is masked from ‘package:tidyr’:
+
+    complete
+
+> 
+> install.packages("skimr")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/skimr_2.1.3.zip'
+Content type 'application/zip' length 1238225 bytes (1.2 MB)
+downloaded 1.2 MB
+
+package ‘skimr’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpsfWCbc\downloaded_packages
+> library(skimr)
+#importing .csv into global enviroment
+data <- read.csv("covid.csv")
+> #view data
+> head(data)
+        Date Confirmed Recovered Deceased
+1 30-01-2020        NA        NA       NA
+2 31-01-2020         0        NA        0
+3 01-02-2020         0        NA        0
+4 02-02-2020         1        NA        0
+5 03-02-2020         1        NA        0
+6 04-02-2020         0        NA        0
+> tail(data)
+          Date Confirmed Recovered Deceased
+513 25-06-2021     11546     11056      118
+514 26-06-2021     12118     11124      118
+515 27-06-2021     10905     12351       62
+516 28-06-2021      8063     11529      110
+517 29-06-2021     13550     10283      104
+518 30-06-2021     13658     11808      142
+> View(data)
+> str(data)
+'data.frame':	518 obs. of  4 variables:
+ $ Date     : chr  "30-01-2020" "31-01-2020" "01-02-2020" "02-02-2020" ...
+ $ Confirmed: int  NA 0 0 1 1 0 0 0 0 0 ...
+ $ Recovered: int  NA NA NA NA NA NA NA NA NA NA ...
+ $ Deceased : int  NA 0 0 0 0 0 0 0 0 0 ...
+#dimenstion of dataset
+> dim(data)
+[1] 518   4
+#list the datatype of each attribute
+> sapply(data,class)
+       Date   Confirmed   Recovered    Deceased 
+"character"   "integer"   "integer"   "integer" 
+#check wheather there is null value
+> sum(is.na(data))
+[1] 59
+ #sumarize
+> summary(data)
+     Date             Confirmed       Recovered        Deceased    
+ Length:518         Min.   :    0   Min.   :    0   Min.   :  0.0  
+ Class :character   1st Qu.:   83   1st Qu.:  245   1st Qu.:  0.0  
+ Mode  :character   Median : 2802   Median : 3654   Median : 14.0  
+                    Mean   : 5656   Mean   : 6095   Mean   : 25.6  
+                    3rd Qu.: 6282   3rd Qu.: 6370   3rd Qu.: 25.0  
+                    Max.   :43529   Max.   :99651   Max.   :227.0  
+                    NA's   :1       NA's   :57      NA's   :1      
+> #displaying detailed summary statistics
+> skim(data)
+-- Data Summary ------------------------
+                           Values
+Name                       data  
+Number of rows             518   
+Number of columns          4     
+_______________________          
+Column type frequency:           
+  character                1     
+  numeric                  3     
+________________________         
+Group variables            None  
+
+-- Variable type: character ---------------------------------------------------------------
+# A tibble: 1 x 8
+  skim_variable n_missing complete_rate   min   max empty n_unique whitespace
+* <chr>             <int>         <dbl> <int> <int> <int>    <int>      <int>
+1 Date                  0             1    10    10     0      518          0
+
+-- Variable type: numeric -----------------------------------------------------------------
+# A tibble: 3 x 11
+  skim_variable n_missing complete_rate   mean     sd    p0   p25   p50   p75  p100 hist 
+* <chr>             <int>         <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <chr>
+1 Confirmed             1         0.998 5656.  8500.      0    83  2802  6282 43529 ▇▁▁▁▁
+2 Recovered            57         0.890 6095.  9500.      0   245  3654  6370 99651 ▇▁▁▁▁
+3 Deceased              1         0.998   25.6   43.2     0     0    14    25   227 ▇▁▁▁▁
+> #group data by index
+> data %>%
++     dplyr::group_by(Deceased)%>%
++     skim()
+-- Data Summary ------------------------
+                           Values    
+Name                       Piped data
+Number of rows             518       
+Number of columns          4         
+_______________________              
+Column type frequency:               
+  character                1         
+  numeric                  2         
+________________________             
+Group variables            Deceased  
+
+-- Variable type: character ---------------------------------------------------------------
+# A tibble: 92 x 9
+   skim_variable Deceased n_missing complete_rate   min   max empty n_unique whitespace
+ * <chr>            <int>     <int>         <dbl> <int> <int> <int>    <int>      <int>
+ 1 Date                 0         0             1    10    10     0      138          0
+ 2 Date                 1         0             1    10    10     0       30          0
+ 3 Date                 2         0             1    10    10     0       12          0
+ 4 Date                 3         0             1    10    10     0        5          0
+ 5 Date                 4         0             1    10    10     0        4          0
+ 6 Date                 5         0             1    10    10     0        5          0
+ 7 Date                 6         0             1    10    10     0        3          0
+ 8 Date                 7         0             1    10    10     0        8          0
+ 9 Date                 8         0             1    10    10     0        1          0
+10 Date                 9         0             1    10    10     0        2          0
+11 Date                10         0             1    10    10     0        9          0
+12 Date                11         0             1    10    10     0        7          0
+13 Date                12         0             1    10    10     0       13          0
+14 Date                13         0             1    10    10     0       10          0
+15 Date                14         0             1    10    10     0       15          0
+16 Date                15         0             1    10    10     0       13          0
+17 Date                16         0             1    10    10     0       16          0
+18 Date                17         0             1    10    10     0        7          0
+19 Date                18         0             1    10    10     0        9          0
+20 Date                19         0             1    10    10     0       10          0
+21 Date                20         0             1    10    10     0       11          0
+22 Date                21         0             1    10    10     0       15          0
+23 Date                22         0             1    10    10     0       15          0
+24 Date                23         0             1    10    10     0       14          0
+25 Date                24         0             1    10    10     0        9          0
+26 Date                25         0             1    10    10     0       14          0
+27 Date                26         0             1    10    10     0       15          0
+28 Date                27         0             1    10    10     0       14          0
+29 Date                28         0             1    10    10     0       13          0
+30 Date                29         0             1    10    10     0        6          0
+31 Date                30         0             1    10    10     0        3          0
+32 Date                31         0             1    10    10     0        2          0
+33 Date                32         0             1    10    10     0        3          0
+34 Date                33         0             1    10    10     0        1          0
+35 Date                35         0             1    10    10     0        1          0
+36 Date                41         0             1    10    10     0        1          0
+37 Date                45         0             1    10    10     0        1          0
+38 Date                48         0             1    10    10     0        2          0
+39 Date                49         0             1    10    10     0        2          0
+40 Date                54         0             1    10    10     0        1          0
+41 Date                57         0             1    10    10     0        1          0
+42 Date                58         0             1    10    10     0        1          0
+43 Date                62         0             1    10    10     0        1          0
+44 Date                63         0             1    10    10     0        1          0
+45 Date                64         0             1    10    10     0        1          0
+46 Date                65         0             1    10    10     0        1          0
+47 Date                68         0             1    10    10     0        1          0
+48 Date                79         0             1    10    10     0        1          0
+49 Date                87         0             1    10    10     0        1          0
+50 Date                88         0             1    10    10     0        1          0
+51 Date                89         0             1    10    10     0        1          0
+52 Date                90         0             1    10    10     0        1          0
+53 Date                93         0             1    10    10     0        1          0
+54 Date                94         0             1    10    10     0        1          0
+55 Date                95         0             1    10    10     0        1          0
+56 Date                96         0             1    10    10     0        1          0
+57 Date                97         0             1    10    10     0        2          0
+58 Date               104         0             1    10    10     0        1          0
+59 Date               110         0             1    10    10     0        1          0
+60 Date               112         0             1    10    10     0        2          0
+61 Date               115         0             1    10    10     0        1          0
+62 Date               118         0             1    10    10     0        2          0
+63 Date               124         0             1    10    10     0        1          0
+64 Date               128         0             1    10    10     0        1          0
+65 Date               135         0             1    10    10     0        1          0
+66 Date               136         0             1    10    10     0        1          0
+67 Date               141         0             1    10    10     0        1          0
+68 Date               142         0             1    10    10     0        2          0
+69 Date               147         0             1    10    10     0        1          0
+70 Date               150         0             1    10    10     0        1          0
+71 Date               151         0             1    10    10     0        1          0
+72 Date               153         0             1    10    10     0        1          0
+73 Date               156         0             1    10    10     0        1          0
+74 Date               161         0             1    10    10     0        1          0
+75 Date               166         0             1    10    10     0        1          0
+76 Date               171         0             1    10    10     0        1          0
+77 Date               173         0             1    10    10     0        1          0
+78 Date               174         0             1    10    10     0        1          0
+79 Date               176         0             1    10    10     0        1          0
+80 Date               177         0             1    10    10     0        1          0
+81 Date               181         0             1    10    10     0        1          0
+82 Date               186         0             1    10    10     0        1          0
+83 Date               188         0             1    10    10     0        1          0
+84 Date               194         0             1    10    10     0        3          0
+85 Date               196         0             1    10    10     0        1          0
+86 Date               198         0             1    10    10     0        1          0
+87 Date               206         0             1    10    10     0        1          0
+88 Date               209         0             1    10    10     0        1          0
+89 Date               211         0             1    10    10     0        1          0
+90 Date               213         0             1    10    10     0        1          0
+91 Date               227         0             1    10    10     0        1          0
+92 Date                NA         0             1    10    10     0        1          0
+
+-- Variable type: numeric -----------------------------------------------------------------
+# A tibble: 184 x 12
+    skim_variable Deceased n_missing complete_rate    mean      sd    p0     p25     p50
+  * <chr>            <int>     <int>         <dbl>   <dbl>   <dbl> <dbl>   <dbl>   <dbl>
+  1 Confirmed            0         0         1        36.2    72.2     0     0       7  
+  2 Confirmed            1         0         1       277.    355.      3    61.2    88.5
+  3 Confirmed            2         0         1       667.    281.    193   478.    648. 
+  4 Confirmed            3         0         1      1070.    571.     94  1083    1298  
+  5 Confirmed            4         0         1      1153     219.    885  1076.   1154. 
+  6 Confirmed            5         0         1      1351.    339.   1078  1103    1251  
+  7 Confirmed            6         0         1      1789     593.   1212  1485    1758  
+  8 Confirmed            7         0         1      1762.    517.   1184  1446.   1578. 
+  9 Confirmed            8         0         1      1129      NA    1129  1129    1129  
+ 10 Confirmed            9         0         1      3160.   1685.   1968  2564.   3160. 
+ 11 Confirmed           10         0         1      2195.    569.   1530  1569    2375  
+ 12 Confirmed           11         0         1      2496.   1575.   1054  1396.   2479  
+ 13 Confirmed           12         0         1      2427.    871.   1239  1983    2216  
+ 14 Confirmed           13         0         1      2490.    870.   1725  1978    2116. 
+ 15 Confirmed           14         0         1      3049.    838.   1780  2492.   3047  
+ 16 Confirmed           15         0         1      2861.    979.   1792  2078    2653  
+ 17 Confirmed           16         0         1      4190.   1530.   2212  2787.   4219  
+ 18 Confirmed           17         0         1      4079.   1549.   1984  3354.   3459  
+ 19 Confirmed           18         0         1      5012.   1247.   2910  4353    4937  
+ 20 Confirmed           19         0         1      5106.   1373.   2710  4397.   5550  
+ 21 Confirmed           20         0         1      6046.   1775.   3110  4957    6036  
+ 22 Confirmed           21         0         1      6386.   2736.   3382  4793    5328  
+ 23 Confirmed           22         0         1      7505.   4513.   3593  5352.   6268  
+ 24 Confirmed           23         0         1      6386.   2299.   3272  5004.   5540  
+ 25 Confirmed           24         0         1      5538.   1242.   2707  5440    5457  
+ 26 Confirmed           25         0         1      8834.   6207.   4600  5514.   6322  
+ 27 Confirmed           26         0         1      6657.   1224.   4470  5904    6491  
+ 28 Confirmed           27         0         1      8194.   6321.   3423  5444.   6004. 
+ 29 Confirmed           28         0         1     10282.   7362.   4777  6268    6638  
+ 30 Confirmed           29         0         1      6082.   1359.   4642  4953    6006. 
+ 31 Confirmed           30         0         1     13132.  13285.   5215  5463    5711  
+ 32 Confirmed           31         0         1      5204     243.   5032  5118    5204  
+ 33 Confirmed           32         0         1     14872   15543.   5848  5898.   5949  
+ 34 Confirmed           33         0         1      5218      NA    5218  5218    5218  
+ 35 Confirmed           35         0         1      4875      NA    4875  4875    4875  
+ 36 Confirmed           41         0         1     35013      NA   35013 35013   35013  
+ 37 Confirmed           45         0         1     26011      NA   26011 26011   26011  
+ 38 Confirmed           48         0         1     37122.   2101.  35636 36379.  37122. 
+ 39 Confirmed           49         0         1     34579    3705.  31959 33269   34579  
+ 40 Confirmed           54         0         1     38460      NA   38460 38460   38460  
+ 41 Confirmed           57         0         1     37190      NA   37190 37190   37190  
+ 42 Confirmed           58         0         1     41953      NA   41953 41953   41953  
+ 43 Confirmed           62         0         1     10905      NA   10905 10905   10905  
+ 44 Confirmed           63         0         1     42464      NA   42464 42464   42464  
+ 45 Confirmed           64         0         1     41971      NA   41971 41971   41971  
+ 46 Confirmed           65         0         1     27487      NA   27487 27487   27487  
+ 47 Confirmed           68         0         1     35801      NA   35801 35801   35801  
+ 48 Confirmed           79         0         1     37290      NA   37290 37290   37290  
+ 49 Confirmed           87         0         1     21402      NA   21402 21402   21402  
+ 50 Confirmed           88         0         1     12469      NA   12469 12469   12469  
+ 51 Confirmed           89         0         1     29704      NA   29704 29704   29704  
+ 52 Confirmed           90         0         1     11361      NA   11361 11361   11361  
+ 53 Confirmed           93         0         1     34694      NA   34694 34694   34694  
+ 54 Confirmed           94         0         1      7449      NA    7449  7449    7449  
+ 55 Confirmed           95         0         1     43529      NA   43529 43529   43529  
+ 56 Confirmed           96         0         1     32680      NA   32680 32680   32680  
+ 57 Confirmed           97         0         1     35646    6094.  31337 33492.  35646  
+ 58 Confirmed          104         0         1     13550      NA   13550 13550   13550  
+ 59 Confirmed          110         0         1      8063      NA    8063  8063    8063  
+ 60 Confirmed          112         0         1     22204.  14931.  11647 16926.  22204. 
+ 61 Confirmed          115         0         1     12443      NA   12443 12443   12443  
+ 62 Confirmed          118         0         1     11832     404.  11546 11689   11832  
+ 63 Confirmed          124         0         1     15567      NA   15567 15567   15567  
+ 64 Confirmed          128         0         1     30491      NA   30491 30491   30491  
+ 65 Confirmed          135         0         1     16229      NA   16229 16229   16229  
+ 66 Confirmed          136         0         1     12078      NA   12078 12078   12078  
+ 67 Confirmed          141         0         1     12617      NA   12617 12617   12617  
+ 68 Confirmed          142         0         1     21666.  11324.  13658 17662.  21666. 
+ 69 Confirmed          147         0         1     13270      NA   13270 13270   13270  
+ 70 Confirmed          150         0         1     12787      NA   12787 12787   12787  
+ 71 Confirmed          151         0         1     28798      NA   28798 28798   28798  
+ 72 Confirmed          153         0         1     18853      NA   18853 18853   18853  
+ 73 Confirmed          156         0         1     16204      NA   16204 16204   16204  
+ 74 Confirmed          161         0         1      7719      NA    7719  7719    7719  
+ 75 Confirmed          166         0         1     12246      NA   12246 12246   12246  
+ 76 Confirmed          171         0         1     13832      NA   13832 13832   13832  
+ 77 Confirmed          173         0         1     14233      NA   14233 14233   14233  
+ 78 Confirmed          174         0         1     12300      NA   12300 12300   12300  
+ 79 Confirmed          176         0         1     28514      NA   28514 28514   28514  
+ 80 Confirmed          177         0         1     29803      NA   29803 29803   29803  
+ 81 Confirmed          181         0         1     24166      NA   24166 24166   24166  
+ 82 Confirmed          186         0         1     19894      NA   19894 19894   19894  
+ 83 Confirmed          188         0         1     25820      NA   25820 25820   25820  
+ 84 Confirmed          194         0         1     18834    4028.  14424 17092   19760  
+ 85 Confirmed          196         0         1     17821      NA   17821 17821   17821  
+ 86 Confirmed          198         0         1     23513      NA   23513 23513   23513  
+ 87 Confirmed          206         0         1     11584      NA   11584 11584   11584  
+ 88 Confirmed          209         0         1     17328      NA   17328 17328   17328  
+ 89 Confirmed          211         0         1      9313      NA    9313  9313    9313  
+ 90 Confirmed          213         0         1     19661      NA   19661 19661   19661  
+ 91 Confirmed          227         0         1     14672      NA   14672 14672   14672  
+ 92 Confirmed           NA         1         0       NaN      NA      NA    NA      NA  
+ 93 Recovered            0        56         0.594    34.0    48.5     0     4      12.5
+ 94 Recovered            1         0         1       115.    171.      2    11.2    58.5
+ 95 Recovered            2         0         1       435.    331.    132   166.    216  
+ 96 Recovered            3         0         1       698     381.     39   766     800  
+ 97 Recovered            4         0         1      1368.    660.    679   896.   1342. 
+ 98 Recovered            5         0         1       966.    370.    432   814    1049  
+ 99 Recovered            6         0         1      1490     681.    880  1122.   1365  
+100 Recovered            7         0         1      1465.    534.    784  1114.   1464. 
+101 Recovered            8         0         1       752      NA     752   752     752  
+102 Recovered            9         0         1      1977    1075.   1217  1597    1977  
+103 Recovered           10         0         1      1831.    425.   1099  1456    2060  
+104 Recovered           11         0         1      2248.    716.   1238  1866    2111  
+105 Recovered           12         0         1      2150.    572.   1419  1766    1866  
+106 Recovered           13         0         1      3159.   1567.   1131  1959.   3145  
+107 Recovered           14         0         1      3222.   1312.   1326  2000.   3377  
+108 Recovered           15         0         1      3084    1227.   1292  2110    2884  
+109 Recovered           16         0         1      4241.   1469.   1946  3322.   4446  
+110 Recovered           17         0         1      4502.   1707.   1965  3252.   5215  
+111 Recovered           18         0         1      4851.   1830.   2205  3026    5332  
+112 Recovered           19         0         1      5512.   1142.   3007  5181.   5771  
+113 Recovered           20         0         1      4675.   1772.   2700  3153    4092  
+114 Recovered           21         0         1      5202.   1610.   3168  3787    4985  
+115 Recovered           22         0         1      5145.   1717.   2475  3978.   5424  
+116 Recovered           23         0         1      5300.   1226.   3536  4645.   4778  
+117 Recovered           24         0         1      6066    1137.   4481  5029    6767  
+118 Recovered           25         0         1      5808.   1516.   3463  4746.   5457  
+119 Recovered           26         0         1      6643.   1322.   4296  5944    6793  
+120 Recovered           27         0         1      5864.   1210.   3654  5022.   5794. 
+121 Recovered           28         0         1      6682.   1311.   3880  5924    6698  
+122 Recovered           29         0         1      5055.   1429.   2828  4748.   5004. 
+123 Recovered           30         0         1      5990.   1901.   4471  4924.   5376  
+124 Recovered           31         0         1      5162.    605.   4735  4949.   5162. 
+125 Recovered           32         0         1      9834.   7435.   5268  5544    5820  
+126 Recovered           33         0         1      5066      NA    5066  5066    5066  
+127 Recovered           35         0         1      4647      NA    4647  4647    4647  
+128 Recovered           41         0         1     15505      NA   15505 15505   15505  
+129 Recovered           45         0         1     19519      NA   19519 19519   19519  
+130 Recovered           48         0         1     18304.   3976.  15493 16899.  18304. 
+131 Recovered           49         0         1     16898     851.  16296 16597   16898  
+132 Recovered           54         0         1     26662      NA   26662 26662   26662  
+133 Recovered           57         0         1     26148      NA   26148 26148   26148  
+134 Recovered           58         0         1     23106      NA   23106 23106   23106  
+135 Recovered           62         0         1     12351      NA   12351 12351   12351  
+136 Recovered           63         0         1     27152      NA   27152 27152   27152  
+137 Recovered           64         0         1     27456      NA   27456 27456   27456  
+138 Recovered           65         0         1     31209      NA   31209 31209   31209  
+139 Recovered           68         0         1     29318      NA   29318 29318   29318  
+140 Recovered           79         0         1     32978      NA   32978 32978   32978  
+141 Recovered           87         0         1     99651      NA   99651 99651   99651  
+142 Recovered           88         0         1     13614      NA   13614 13614   13614  
+143 Recovered           89         0         1     34296      NA   34296 34296   34296  
+144 Recovered           90         0         1     12147      NA   12147 12147   12147  
+145 Recovered           93         0         1     31319      NA   31319 31319   31319  
+146 Recovered           94         0         1     13596      NA   13596 13596   13596  
+147 Recovered           95         0         1     34600      NA   34600 34600   34600  
+148 Recovered           96         0         1     29442      NA   29442 29442   29442  
+149 Recovered           97         0         1     39830.   8622.  33733 36781.  39830. 
+150 Recovered          104         0         1     10283      NA   10283 10283   10283  
+151 Recovered          110         0         1     11529      NA   11529 11529   11529  
+152 Recovered          112         0         1     30436   25423.  12459 21448.  30436  
+153 Recovered          115         0         1     13145      NA   13145 13145   13145  
+154 Recovered          118         0         1     11090      48.1 11056 11073   11090  
+155 Recovered          124         0         1     20019      NA   20019 20019   20019  
+156 Recovered          128         0         1     44369      NA   44369 44369   44369  
+157 Recovered          135         0         1     25860      NA   25860 25860   25860  
+158 Recovered          136         0         1     11469      NA   11469 11469   11469  
+159 Recovered          141         0         1     11730      NA   11730 11730   11730  
+160 Recovered          142         0         1     26420   20664.  11808 19114   26420  
+161 Recovered          147         0         1     15689      NA   15689 15689   15689  
+162 Recovered          150         0         1     13683      NA   13683 13683   13683  
+163 Recovered          151         0         1     35525      NA   35525 35525   35525  
+164 Recovered          153         0         1     26569      NA   26569 26569   26569  
+165 Recovered          156         0         1     20237      NA   20237 20237   20237  
+166 Recovered          161         0         1     16743      NA   16743 16743   16743  
+167 Recovered          166         0         1     13536      NA   13536 13536   13536  
+168 Recovered          171         0         1     18172      NA   18172 18172   18172  
+169 Recovered          173         0         1     15355      NA   15355 15355   15355  
+170 Recovered          174         0         1     28867      NA   28867 28867   28867  
+171 Recovered          176         0         1     45400      NA   45400 45400   45400  
+172 Recovered          177         0         1     33397      NA   33397 33397   33397  
+173 Recovered          181         0         1     30539      NA   30539 30539   30539  
+174 Recovered          186         0         1     29013      NA   29013 29013   29013  
+175 Recovered          188         0         1     37316      NA   37316 37316   37316  
+176 Recovered          194         0         1     22794.   4294.  17994 21056.  24117  
+177 Recovered          196         0         1     36039      NA   36039 36039   36039  
+178 Recovered          198         0         1     28100      NA   28100 28100   28100  
+179 Recovered          206         0         1     17856      NA   17856 17856   17856  
+180 Recovered          209         0         1     24003      NA   24003 24003   24003  
+181 Recovered          211         0         1     21921      NA   21921 21921   21921  
+182 Recovered          213         0         1     29708      NA   29708 29708   29708  
+183 Recovered          227         0         1     21429      NA   21429 21429   21429  
+184 Recovered           NA         1         0       NaN      NA      NA    NA      NA  
+       p75  p100 hist   
+  *  <dbl> <dbl> <chr>  
+  1    24    416 "▇▁▁▁▁"
+  2   494.  1169 "▇▁▁▂▁"
+  3   848.  1211 "▂▇▃▅▂"
+  4  1310   1564 "▂▁▁▂▇"
+  5  1230.  1420 "▃▁▇▁▃"
+  6  1417   1908 "▇▃▃▁▃"
+  7  2078.  2397 "▇▁▇▁▇"
+  8  2199.  2543 "▅▇▁▂▅"
+  9  1129   1129 "▁▁▇▁▁"
+ 10  3755.  4351 "▇▁▁▁▇"
+ 11  2456   3082 "▇▂▇▁▅"
+ 12  2726.  5692 "▇▇▁▁▂"
+ 13  3215   4167 "▅▇▂▅▂"
+ 14  2782   4650 "▇▂▁▁▁"
+ 15  3674   4584 "▆▆▆▇▃"
+ 16  3254   4612 "▇▆▂▁▅"
+ 17  5416.  6986 "▇▂▂▇▁"
+ 18  5104   6194 "▂▇▂▁▅"
+ 19  5980   6815 "▃▇▇▇▇"
+ 20  5999   6753 "▃▂▁▇▆"
+ 21  6936.  9258 "▃▃▇▂▃"
+ 22  7226. 13644 "▇▃▁▁▁"
+ 23  7732. 22414 "▇▃▁▁▁"
+ 24  7712. 11755 "▅▇▅▃▂"
+ 25  5887   7283 "▂▁▇▇▅"
+ 26  9001. 26685 "▇▂▁▁▁"
+ 27  6941   9016 "▂▅▇▁▃"
+ 28  7738. 28447 "▇▁▁▁▁"
+ 29  8516  26995 "▇▁▁▂▁"
+ 30  6828.  8135 "▇▃▃▃▃"
+ 31 17090  28469 "▇▁▁▁▃"
+ 32  5290   5376 "▇▁▁▁▇"
+ 33 19384  32819 "▇▁▁▁▃"
+ 34  5218   5218 "▁▁▇▁▁"
+ 35  4875   4875 "▁▁▇▁▁"
+ 36 35013  35013 "▁▁▇▁▁"
+ 37 26011  26011 "▁▁▇▁▁"
+ 38 37864. 38607 "▇▁▁▁▇"
+ 39 35889  37199 "▇▁▁▁▇"
+ 40 38460  38460 "▁▁▇▁▁"
+ 41 37190  37190 "▁▁▇▁▁"
+ 42 41953  41953 "▁▁▇▁▁"
+ 43 10905  10905 "▁▁▇▁▁"
+ 44 42464  42464 "▁▁▇▁▁"
+ 45 41971  41971 "▁▁▇▁▁"
+ 46 27487  27487 "▁▁▇▁▁"
+ 47 35801  35801 "▁▁▇▁▁"
+ 48 37290  37290 "▁▁▇▁▁"
+ 49 21402  21402 "▁▁▇▁▁"
+ 50 12469  12469 "▁▁▇▁▁"
+ 51 29704  29704 "▁▁▇▁▁"
+ 52 11361  11361 "▁▁▇▁▁"
+ 53 34694  34694 "▁▁▇▁▁"
+ 54  7449   7449 "▁▁▇▁▁"
+ 55 43529  43529 "▁▁▇▁▁"
+ 56 32680  32680 "▁▁▇▁▁"
+ 57 37800. 39955 "▇▁▁▁▇"
+ 58 13550  13550 "▁▁▇▁▁"
+ 59  8063   8063 "▁▁▇▁▁"
+ 60 27483. 32762 "▇▁▁▁▇"
+ 61 12443  12443 "▁▁▇▁▁"
+ 62 11975  12118 "▇▁▁▁▇"
+ 63 15567  15567 "▁▁▇▁▁"
+ 64 30491  30491 "▁▁▇▁▁"
+ 65 16229  16229 "▁▁▇▁▁"
+ 66 12078  12078 "▁▁▇▁▁"
+ 67 12617  12617 "▁▁▇▁▁"
+ 68 25669. 29673 "▇▁▁▁▇"
+ 69 13270  13270 "▁▁▇▁▁"
+ 70 12787  12787 "▁▁▇▁▁"
+ 71 28798  28798 "▁▁▇▁▁"
+ 72 18853  18853 "▁▁▇▁▁"
+ 73 16204  16204 "▁▁▇▁▁"
+ 74  7719   7719 "▁▁▇▁▁"
+ 75 12246  12246 "▁▁▇▁▁"
+ 76 13832  13832 "▁▁▇▁▁"
+ 77 14233  14233 "▁▁▇▁▁"
+ 78 12300  12300 "▁▁▇▁▁"
+ 79 28514  28514 "▁▁▇▁▁"
+ 80 29803  29803 "▁▁▇▁▁"
+ 81 24166  24166 "▁▁▇▁▁"
+ 82 19894  19894 "▁▁▇▁▁"
+ 83 25820  25820 "▁▁▇▁▁"
+ 84 21039  22318 "▇▁▁▇▇"
+ 85 17821  17821 "▁▁▇▁▁"
+ 86 23513  23513 "▁▁▇▁▁"
+ 87 11584  11584 "▁▁▇▁▁"
+ 88 17328  17328 "▁▁▇▁▁"
+ 89  9313   9313 "▁▁▇▁▁"
+ 90 19661  19661 "▁▁▇▁▁"
+ 91 14672  14672 "▁▁▇▁▁"
+ 92    NA     NA " "    
+ 93    45    209 "▇▁▁▁▁"
+ 94   133.   688 "▇▂▁▁▁"
+ 95   756.   970 "▇▁▁▃▂"
+ 96   864   1021 "▃▁▁▇▇"
+ 97  1814   2111 "▇▇▁▇▇"
+ 98  1110   1426 "▃▃▁▇▃"
+ 99  1795   2225 "▇▇▁▁▇"
+100  1849.  2129 "▇▇▁▇▇"
+101   752    752 "▁▁▇▁▁"
+102  2357   2737 "▇▁▁▁▇"
+103  2172   2196 "▃▂▁▂▇"
+104  2595   3463 "▂▇▂▂▂"
+105  2532   3256 "▇▇▂▃▃"
+106  3968.  5841 "▇▅▅▂▅"
+107  4182   5193 "▇▃▂▆▅"
+108  4333   4854 "▃▇▃▂▇"
+109  5706.  6178 "▆▅▂▅▇"
+110  5746.  6341 "▅▁▂▂▇"
+111  5745   7364 "▇▁▂▇▅"
+112  6383.  6653 "▂▂▂▃▇"
+113  5776.  7792 "▇▃▃▂▃"
+114  6456.  7723 "▇▅▂▅▅"
+115  6072   8410 "▇▆▇▃▃"
+116  5314.  7593 "▁▇▂▁▃"
+117  7003   7375 "▆▂▁▂▇"
+118  6656.  8924 "▂▇▃▁▂"
+119  7674   8802 "▃▁▇▂▃"
+120  6522.  7854 "▃▆▇▃▆"
+121  7828   8511 "▂▃▆▆▇"
+122  5436.  7252 "▂▁▇▂▂"
+123  6749   8122 "▇▇▁▁▇"
+124  5376.  5590 "▇▁▁▁▇"
+125 12116. 18413 "▇▁▁▁▃"
+126  5066   5066 "▁▁▇▁▁"
+127  4647   4647 "▁▁▇▁▁"
+128 15505  15505 "▁▁▇▁▁"
+129 19519  19519 "▁▁▇▁▁"
+130 19710. 21116 "▇▁▁▁▇"
+131 17199  17500 "▇▁▁▁▇"
+132 26662  26662 "▁▁▇▁▁"
+133 26148  26148 "▁▁▇▁▁"
+134 23106  23106 "▁▁▇▁▁"
+135 12351  12351 "▁▁▇▁▁"
+136 27152  27152 "▁▁▇▁▁"
+137 27456  27456 "▁▁▇▁▁"
+138 31209  31209 "▁▁▇▁▁"
+139 29318  29318 "▁▁▇▁▁"
+140 32978  32978 "▁▁▇▁▁"
+141 99651  99651 "▁▁▇▁▁"
+142 13614  13614 "▁▁▇▁▁"
+143 34296  34296 "▁▁▇▁▁"
+144 12147  12147 "▁▁▇▁▁"
+145 31319  31319 "▁▁▇▁▁"
+146 13596  13596 "▁▁▇▁▁"
+147 34600  34600 "▁▁▇▁▁"
+148 29442  29442 "▁▁▇▁▁"
+149 42878. 45926 "▇▁▁▁▇"
+150 10283  10283 "▁▁▇▁▁"
+151 11529  11529 "▁▁▇▁▁"
+152 39424. 48413 "▇▁▁▁▇"
+153 13145  13145 "▁▁▇▁▁"
+154 11107  11124 "▇▁▁▁▇"
+155 20019  20019 "▁▁▇▁▁"
+156 44369  44369 "▁▁▇▁▁"
+157 25860  25860 "▁▁▇▁▁"
+158 11469  11469 "▁▁▇▁▁"
+159 11730  11730 "▁▁▇▁▁"
+160 33726  41032 "▇▁▁▁▇"
+161 15689  15689 "▁▁▇▁▁"
+162 13683  13683 "▁▁▇▁▁"
+163 35525  35525 "▁▁▇▁▁"
+164 26569  26569 "▁▁▇▁▁"
+165 20237  20237 "▁▁▇▁▁"
+166 16743  16743 "▁▁▇▁▁"
+167 13536  13536 "▁▁▇▁▁"
+168 18172  18172 "▁▁▇▁▁"
+169 15355  15355 "▁▁▇▁▁"
+170 28867  28867 "▁▁▇▁▁"
+171 45400  45400 "▁▁▇▁▁"
+172 33397  33397 "▁▁▇▁▁"
+173 30539  30539 "▁▁▇▁▁"
+174 29013  29013 "▁▁▇▁▁"
+175 37316  37316 "▁▁▇▁▁"
+176 25194. 26270 "▇▁▁▇▇"
+177 36039  36039 "▁▁▇▁▁"
+178 28100  28100 "▁▁▇▁▁"
+179 17856  17856 "▁▁▇▁▁"
+180 24003  24003 "▁▁▇▁▁"
+181 21921  21921 "▁▁▇▁▁"
+182 29708  29708 "▁▁▇▁▁"
+183 21429  21429 "▁▁▇▁▁"
+184    NA     NA " "    
+
+#input and output
+> x<-data[,2:3]
+> view(x)
+> y<-data[,2]
+> view(y)
+> #plots
+> boxplot(x[,2],main=names(data)[1],ylab="Confirmed")
+> boxplot(x[,2],main=names(data)[3],ylab="30-01-2020")
+> #for all attribute
+> par (mfrow=c(1,1))
+> for(i in 1:1)
++ {
++     boxplot(x[,i],main=names(data)[i])
++ }
+> 
+> library(caret)
+> plot(x)
+> #scatter plot
+> library(caret)
+> featurePlot(x=x,y=y)
+> 
+> install.packages("ellipse")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/ellipse_0.4.2.zip'
+Content type 'application/zip' length 72044 bytes (70 KB)
+downloaded 70 KB
+
+package ‘ellipse’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpY7c43n\downloaded_packages
+> library(ellipse)
+
+Attaching package: ‘ellipse’
+
+The following object is masked from ‘package:graphics’:
+
+    pairs
+
+> library(caret)
+> featurePlot(x=x,y=y,plot ="ellipse")
+NULL
+> #box plots
+> library(caret)
+> featurePlot(x=x,y=y,plot="box")
+NULL
+> #density plot
+> scales<-list(x=list(relation="free"),y=list(relation="free"))
+> 
+> scales<-list(x=list(relation="free"),y=list(relation="free"))
+> featurePlot(x=x,y=y,plot = "density",scales=scales)
+NULL
+> #barplot
+> counts<-table(data$Confirmed)
+> barplot(counts)
+> barplot(counts,horiz=TRUE)
+> barplot(counts,
++         main="Barplot",xlab="open",legend=rownames(counts),col=c("red","yellow","green"))
+> 
+> #boxplot
+> bwplot(~Confirmed,data=data,main="boxplots")
+> library("caret")
+> #High
+> bwplot(~Confirmed|01-03-2021,data=data,main="boxplots")
+> #hisogram
+> install.packages("lattice")
+Error in install.packages : Updating loaded packages
+> library(lattice)
+> histogram(~Confirmed,data = data,main="histogram")
+> histogram(~01-03-2021,data = data,main="histogram")
+> 
+
+Restarting R session...
+
+> install.packages("lattice")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/lattice_0.20-44.zip'
+Content type 'application/zip' length 1182219 bytes (1.1 MB)
+downloaded 1.1 MB
+
+package ‘lattice’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpqyP1Fd\downloaded_packages
+> #scatter
+> xyplot(Confirmed~01-03-2021,data=data,main="Scatterplot")
+ 
+> View(x)
+> View(scales)
+> library(lattice)
+> histogram(~Confirmed,data = data,main="histogram")
+> histogram(~01-03-2021,data = data,main="histogram")
+> 
+> #scatter
+> xyplot(Confirmed~01-03-2021,data=data,main="Scatterplot")
+> 
+> #barchart
+> barchart(~Confirmed,data=data,main="Barchart")
+> barchart(~01-03-2021,data=data,main="Barchart")
+> 
+> #densityplot
+> densityplot(~Confirmed,data=data)
+> densityplot(~01-03-2021,data=data)
+> #piechart
+> install.packages("plotrix")
+WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+Installing package into ‘C:/Users/Shreya S Rao/Documents/R/win-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cran.rstudio.com/bin/windows/contrib/4.1/plotrix_3.8-1.zip'
+Content type 'application/zip' length 1138090 bytes (1.1 MB)
+downloaded 1.1 MB
+
+package ‘plotrix’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+	C:\Users\Shreya S Rao\AppData\Local\Temp\RtmpqyP1Fd\downloaded_packages
+> library(plotrix)
+> slices<-c("Confirmed")
+> lbls<-c("01-03-2021")
+> pie(slices,labels=lbls,main="Piecharts")
+Error in pie(slices, labels = lbls, main = "Piecharts") : 
+  'x' values must be positive.
+> #ggplot
+> library(ggplot2)
+> library(grid)
+> library(gridExtra)
+> (plot1<-ggplot(data=data,mapping=aes(x=Confirmed,y=01-03-2021))+geom_boxplot())
+Warning message:
+Removed 1 rows containing non-finite values (stat_boxplot). 
+> ggplot(data=data,mapping=aes(x=Confirmed,y=01-03-2021))+geom_boxplot(notch = TRUE,outlier.colour = "green",outlier.size = 3)
+Warning message:
+Removed 1 rows containing non-finite values (stat_boxplot). 
+> #modify
+> ggplot(data=data,mapping=aes(x=01-03-2021,y=Confirmed,colour=01-03-2021))+geom_point()+facet_grid(~Confirmed
